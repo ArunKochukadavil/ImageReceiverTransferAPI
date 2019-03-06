@@ -28,7 +28,7 @@ namespace ImageTransferReceiveAPI.Controllers
 				byte[] imageBytes = Convert.FromBase64String(content);
 				MemoryStream ms = new MemoryStream(imageBytes, 0, imageBytes.Length);
 				var name = (string)jsonObj["name"];
-				var path = @"C:\Users\Arun\Desktop\project\Matlab-Download\ProjectHGR\" + name + ".jpg";
+				var path = @"C:\Users\Arun\Desktop\project\Matlab-Download\ProjectHGR\" + name;
 				ms.Write(imageBytes, 0, imageBytes.Length);
 				System.Drawing.Image image = System.Drawing.Image.FromStream(ms, true);
 				image.Save(path, System.Drawing.Imaging.ImageFormat.Jpeg);
@@ -43,5 +43,12 @@ namespace ImageTransferReceiveAPI.Controllers
 			
 			//return View();
 		}
+		public ActionResult GetOutPut(string name)
+		{
+			var path = @"C:\Users\Arun\Desktop\project\Matlab-Download\ProjectHGR\" + name + ".txt";
+			var json = new { data = new Data().getImageOutput(path) };
+			return Json(json, JsonRequestBehavior.AllowGet);
+		}
+
 	}
 }
