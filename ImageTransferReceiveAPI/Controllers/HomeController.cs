@@ -17,6 +17,10 @@ namespace ImageTransferReceiveAPI.Controllers
 
 			return View();
 		}
+		/// <summary>
+		/// This will recieve a Json file containing base64 form of image and will process it and send back the result inside a json file
+		/// </summary>
+		/// <returns></returns>
 		public ActionResult ImageReceiver()
 		{
 			try
@@ -56,6 +60,11 @@ namespace ImageTransferReceiveAPI.Controllers
 			var json = new { data = new Data().getImageOutput(path) };
 			return Json(json, JsonRequestBehavior.AllowGet);
 		}
+		/// <summary>
+		/// This will start the python script for recognizing gestures
+		/// </summary>
+		/// <param name="path">the location of the image which we had converted to the jpg format from base64 which we recieved from the client</param>
+		/// <returns>result of the input image</returns>
 		public string startProcess(string path)
 		{
 			ProcessStartInfo pStartInfo = new ProcessStartInfo();
